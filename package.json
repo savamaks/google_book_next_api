@@ -15,8 +15,10 @@
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.7",
     "next": "13.4.7",
+    "normalize.css": "^8.0.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "styled-components": "^6.0.0-rc.6",
     "typescript": "5.1.3"
   }
 }
