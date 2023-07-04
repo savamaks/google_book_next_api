@@ -1,0 +1,30 @@
+.container {
+    position: relative;
+    margin: 0 auto;
+    padding: 0 166px;
+    height: 116px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1440px;
+    background-color: #ffffff;
+}
+
+.title {
+    color: #1c2a39;
+    font-size: 24px;
+    font-weight: 700;
+    cursor: pointer;
+}
+.box {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+.text {
+    color: #5c6a79;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+
+}

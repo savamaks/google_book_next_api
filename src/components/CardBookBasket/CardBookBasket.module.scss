@@ -1,0 +1,66 @@
+.box {
+    margin-top: 66px;
+}
+.card {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    gap: 25px;
+    &_img {
+        max-width: 102px;
+        max-height: 151px;
+        box-shadow: 0px 24px 36px rgba(53, 49, 84, 0.28);
+    }
+    &_boxDescription {
+        display: flex;
+        flex-direction: column;
+        &_title {
+            color: #1c2a39;
+            font-size: 16px;
+            font-weight: 700;
+        }
+        &_author {
+            color: #5c6a79;
+            font-size: 10px;
+            font-family: Open Sans;
+            text-transform: capitalize;
+        }
+        &_boxRaiting {
+            display: flex;
+        }
+    }
+    &_boxButton {
+        width: max-content;
+        border: 1px solid #eeedf5;
+        padding: 10px 16px;
+        display: flex;
+        align-items: center;
+        gap: 47px;
+        font-size: 22px;
+
+        &_count {
+            color: #5c6a79;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+    }
+    &_price {
+        color: #1c2a39;
+        font-size: 18px;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+    &_delivery {
+        color: #5c6a79;
+        font-size: 12px;
+        font-weight: 700;
+    }
+}
+.boxRaiting {
+    &_review {
+        color: #5c6a79;
+        font-size: 10px;
+        font-family: Open Sans;
+    }
+}

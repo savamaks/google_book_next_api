@@ -1,0 +1,43 @@
+.container {
+    flex: 100%;
+    display: flex;
+    justify-content: center;
+    max-width: 416px;
+    min-width: 300px;
+    background: #efeef6;
+    padding: 45px 0;
+    height: max-content;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 23px;
+    margin: 0;
+    padding: 0;
+}
+
+.item {
+    list-style: none;
+    color: #5c6a79;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: capitalize;
+    cursor: pointer;
+}
+
+.active {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1C2A39;
+}
+
+.item.active::before {
+    content: "\2022";
+    color: blue;
+    font-weight: bold;
+    display: inline-block; 
+    width: 6px;
+    margin-left: -12px;
+    margin-right: 6px;
+}

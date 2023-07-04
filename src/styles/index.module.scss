@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    margin-top: 105px;
+}
+.box_book {
+    margin-right: 160px;
+    margin-top: 25px;
+    margin-left: -60px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 75px;
+
+    &__button {
+        align-self: center;
+        justify-self: center;
+        color: #4c3db2;
+        font-size: 8px;
+        font-weight: 700;
+        text-transform: uppercase;
+        width: 176px;
+        height: 45px;
+        border: 1px solid #4c3db2;
+    }
+}
+@media (max-width: 1460px) {
+    .box_book {
+        margin-right: 20px;
+        justify-content: center;
+    }
+}
