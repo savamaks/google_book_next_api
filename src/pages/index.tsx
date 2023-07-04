@@ -13,7 +13,7 @@ export default function Home() {
     const { dataApi,categoriesBook } = useAppSelector((state) => state.reducer);
     
     useEffect(() => {
-        dispatch(fetchBook({ subject: categoriesBook, page: 1, maxResult: 6 }));
+        dispatch(fetchBook({ subject: categoriesBook, page: 1, maxResult: 10 }));
     }, [categoriesBook]);
     return (
         <Layout>

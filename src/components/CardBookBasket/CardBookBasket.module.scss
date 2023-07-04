@@ -14,7 +14,10 @@
     &_boxDescription {
         display: flex;
         flex-direction: column;
+        max-width: 300px;
+        gap: 8px;
         &_title {
+
             color: #1c2a39;
             font-size: 16px;
             font-weight: 700;
@@ -26,6 +29,8 @@
             text-transform: capitalize;
         }
         &_boxRaiting {
+            gap: 5px;
+            align-items: center;
             display: flex;
         }
     }

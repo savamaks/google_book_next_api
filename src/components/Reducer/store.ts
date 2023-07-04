@@ -6,7 +6,7 @@ import { combineReducers } from '@reduxjs/toolkit';
 import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { persistStore } from 'redux-persist';
-
+import booksSlice from './sliceBook'
 // <reference types="redux-persist" />
 
 const persistConfig = {
@@ -15,7 +15,7 @@ const persistConfig = {
 }
 
 
-const rootReducer = combineReducers({ reducer})
+const rootReducer = combineReducers({ reducer,booksSlice})
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

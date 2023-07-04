@@ -21,8 +21,9 @@ const Layout = ({ children }: PropsWithChildren) => {
     return (
         <>
             <Head>
-                <title>Google Book</title>
-                <meta name="description" content="SkillFactory Next.js project" />
+                <title>Google Books Api</title>
+                <meta name="description" content="Google Books shop" />
+                <meta name="author" content="Maksim Savinets" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
@@ -30,8 +31,7 @@ const Layout = ({ children }: PropsWithChildren) => {
             <div className={montserrat.className}>
                 <Header />
                 <main className={style.main}>{children}</main>
-                <footer>
-                </footer>
+                <footer></footer>
             </div>
         </>
     );

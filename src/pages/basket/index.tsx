@@ -5,8 +5,16 @@ import CardBookBasket from "@/components/CardBookBasket/CardBookBasket";
 import Image from "next/image";
 import ava from "../../../public/images/a-wq-u-sd-ktl-2.png";
 import styles from "../../components/CardBookBasket/CardBookBasket.module.scss";
+import { useAppSelector } from "@/components/Reducer/store";
 
 const Basket = () => {
+    const books = useAppSelector((state) => state.booksSlice);
+    let totalPrice = 0;
+    books.ids.map((el: any) => {
+        if (books.entities[el].saleInfo.listPrice?.amount) {
+            totalPrice = totalPrice + (books.entities[el].count * books.entities[el].saleInfo.listPrice?.amount);
+        }
+    });
     return (
         <Layout>
             <div className={style.container}>
@@ -19,15 +27,12 @@ const Basket = () => {
                             <td className={style.table_box_title}>PRICE</td>
                             <td className={style.table_box_title}>DELIVERY</td>
                         </tr>
-                        <CardBookBasket />
-                        <CardBookBasket />
-                        <CardBookBasket />
-                        <CardBookBasket />
-                        <CardBookBasket />
-                        <CardBookBasket />
+                        {books.ids.map((el: any, index: number) => {
+                            return <CardBookBasket key={index} book={books.entities[el]} />;
+                        })}
                     </tbody>
                 </table>
-                <p className={style.text}>TOTAL PRICE: $30.58</p>
+                <p className={style.text}>{totalPrice.toFixed(2)} RUB</p>
             </div>
         </Layout>
     );

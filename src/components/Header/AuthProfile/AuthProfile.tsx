@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import style from "./AuthProfile.module.scss";
-import emailValidate from "@/components/func/emailValidate";
+import emailValidate from "@/components/func/exportFunc";
 import { useSelector } from "react-redux";
 import { useAppSelector } from "@/components/Reducer/store";
 

@@ -1,30 +1,67 @@
-import React from "react";
 import styles from "./CardBookBasket.module.scss";
 import Image from "next/image";
-import ava from "../../../public/images/a-wq-u-sd-ktl-2.png";
+import { useDispatch } from "react-redux";
+import { bookAdded, bookRemove } from "../Reducer/sliceBook";
+import { validateSrc } from "../func/exportFunc";
 
-const CardBookBasket = () => {
+const CardBookBasket = ({ book }: any) => {
+    // console.log(book);
+    const dispatch = useDispatch();
+    const srcImage: string = validateSrc(book.volumeInfo.imageLinks);
+
+    const imageLoader = ({ src }: any) => {
+        return `${src}`;
+    };
+    const plusCount = () => {
+        let bookBasket = {
+            ...book,
+            count: book.count + 1,
+        };
+        dispatch(bookAdded(bookBasket));
+    };
+    const minusCount = () => {
+        if (book.count > 1) {
+            let bookBasket = {
+                ...book,
+                count: book.count - 1,
+            };
+            dispatch(bookAdded(bookBasket));
+        }
+        if (book.count === 1) {
+            console.log(book.id);
+            dispatch(bookRemove(book.id));
+        }
+    };
+    let sale = book.saleInfo.saleability.split("_").join(" ");
+
     return (
-        <tr className={styles.box} >
+        <tr className={styles.box}>
             <td className={styles.card}>
-                <Image className={styles.card_img} src={ava} alt="" />
+                <Image loader={imageLoader} className={styles.card_img} width={300} height={400} src={srcImage} alt="ava" />
                 <div className={styles.card_boxDescription}>
-                    <p className={styles.card_boxDescription_title}>The weight of things</p>
-                    <p className={styles.card_boxDescription_author}>Marianne Fritz</p>
+                    <p className={styles.card_boxDescription_title}>{book.volumeInfo.title}</p>
+                    <p className={styles.card_boxDescription_author}>{book.volumeInfo.authors?.join(", ")}</p>
                     <div className={styles.card_boxDescription_boxRaiting}>
-                        <div className={styles.boxRaiting_star}>star</div>
-                        <p className={styles.boxRaiting_review}>353 reviews</p>
+                        <div className={styles.boxRaiting_star}>{book.volumeInfo.averageRating}</div>
+                        <p className={styles.boxRaiting_review}>{book.volumeInfo.raitingCount ? book.volumeInfo.raitingCount + " rewiew" : ""}</p>
                     </div>
                 </div>
             </td>
             <td>
                 <div className={styles.card_boxButton}>
-                    <button className={styles.card_boxButton_minus}>-</button>
-                    <p className={styles.card_boxButton_count}>0</p>
-                    <button className={styles.card_boxButton_plus}>+</button>
+                    <button className={styles.card_boxButton_minus} onClick={minusCount}>
+                        -
+                    </button>
+                    <p className={styles.card_boxButton_count}>{book.count}</p>
+                    <button className={styles.card_boxButton_plus} onClick={plusCount}>
+                        +
+                    </button>
                 </div>
             </td>
-            <td className={styles.card_price}>$18.23</td>
+            <td className={styles.card_price}>
+                {" "}
+                {book.saleInfo.listPrice ? Math.round(book.saleInfo.listPrice?.amount) : sale} {book.saleInfo.listPrice?.currencyCode}
+            </td>
             <td className={styles.card_delivery}>Shipping: delivery</td>
         </tr>
     );

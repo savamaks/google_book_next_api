@@ -18,7 +18,6 @@ const Header = (): JSX.Element => {
         const position: Array<number> = [e.clientX, e.clientY];
         dispatch(statePositionAuthProfile(position));
 
-        console.log(e);
         dispatch(changeStateBoolean("click"));
     };
 
@@ -48,13 +47,13 @@ const Header = (): JSX.Element => {
             <div className={style.box}>
                 {logIn ? (
                     <Link href={"/user"}>
-                        <Image src={user} alt="" />
+                        <Image src={user} alt="user" />
                     </Link>
                 ) : (
-                    <Image style={{ cursor: "pointer" }} onClick={clickUserProfile} src={user} alt="" />
+                    <Image style={{ cursor: "pointer" }} onClick={clickUserProfile} src={user} alt="user" />
                 )}
                 <Link href={"/basket"}>
-                    <Image src={bag} alt="" />
+                    <Image src={bag} alt="basket" />
                 </Link>
             </div>
             {!logIn && click && <AuthProfile log={log} />}

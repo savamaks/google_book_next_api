@@ -11,7 +11,7 @@ type ActionTypePayload = {
 };
 
 const state = createSlice({
-    name: "reducer",
+    name: "reducers",
     initialState: {
         logIn: false,
         click: false,
@@ -23,7 +23,7 @@ const state = createSlice({
         dataApi: [],
         error: "",
         categoriesBook: "Architecture",
-        bookBasket: [1],
+        bookBasket:[],
     },
     reducers: {
         changeStateBoolean(state, action: ActionTypePayload) {
@@ -39,7 +39,6 @@ const state = createSlice({
             state.categoriesBook = action.payload;
         },
         changeBasket(state, action) {
-            state.bookBasket = action.payload;
         },
     },
     extraReducers: {
