@@ -18,22 +18,22 @@ const arr: Array<Arr> = [
 const Sliders = (): JSX.Element => {
     const [count, setCount] = useState(0);
     let interval: any;
-    const mouseDown = () => {
-        clearInterval(interval);
-    };
-    const mouseUp = () => {
-        if (count >= 2) {
-            setCount(0);
-        } else {
-            setCount((prev) => prev + 1);
-        }
-    };
+    // const mouseDown = () => {
+    //     clearInterval(interval);
+    // };
+    // const mouseUp = () => {
+    //     if (count >= 2) {
+    //         setCount(0);
+    //     } else {
+    //         setCount((prev) => prev + 1);
+    //     }
+    // };
     const clickPoint = (e: MouseEvent<HTMLDivElement>) => {
         setCount(+e.target.attributes["data-index"].textContent);
     };
 
     useEffect(() => {
-        interval = setInterval(() => {
+        const interval = setInterval(() => {
             if (count >= 2) {
                 setCount(0);
             } else {
@@ -46,7 +46,7 @@ const Sliders = (): JSX.Element => {
     return (
         <div className={style.container}>
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                <Image onMouseDown={mouseDown} onMouseUp={mouseUp} priority={true} className={style.img} src={arr[count].url} alt={arr[count].name} />
+                <Image priority={true} className={style.img} src={arr[count].url} alt={arr[count].name} />
                 <div className={style.box}>
                     {arr.map((el: Arr, index: number) => {
                         return (
