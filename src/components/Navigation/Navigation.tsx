@@ -1,15 +1,21 @@
 import Link from "next/link";
 import style from "./Navigation.module.scss";
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { changeCategoriesBook } from "../Reducer/slice";
+import { changeCategoriesBook, changeCountPage, changeStateBoolean } from "../Reducer/sliceBookApi";
 import { useAppSelector } from "../Reducer/store";
-
+import { fetchBook } from "../RequestApi/RequestApi";
+import { removeAllBook } from "../Reducer/sliceBookApi";
+type ArrType ={
+    name: string,
+    url: string,
+}
 const Navigation = (): JSX.Element => {
     const [active, setActive] = useState("");
     const dispatch = useDispatch();
-    const { categoriesBook } = useAppSelector((state) => state.reducer);
-    const arr = [
+    const { categoriesBook,firstLoading } = useAppSelector((state) => state.booksApiSlice);
+
+    const arr:Array<ArrType> = [
         {
             name: "Architecture",
             url: "Architecture",
@@ -75,78 +81,36 @@ const Navigation = (): JSX.Element => {
             url: "Travel",
         },
     ];
-    const clickItem = (e: any) => {
-        dispatch(changeCategoriesBook(e.target.innerText));
+    const clickItem = (e: MouseEvent<HTMLUListElement>) => {
+        e.preventDefault();
+        if (e.target.innerText !== categoriesBook) {
+            if(firstLoading){
+                dispatch(changeStateBoolean('firstLoading'))
+            }
+           
+            dispatch(removeAllBook());
+            dispatch(changeCategoriesBook(e.target.innerText));
+            dispatch(fetchBook({ subject: e.target.innerText, page: 1, maxResult: 6 }));
+            dispatch(changeCountPage(1))
+            if (active !== "") {
+                active.classList.remove(style.active);
+            }
+            e.target.classList.toggle(style.active);
 
-        // console.log(e.target.innerText);
-        if (active !== "") {
-            active.classList.remove(style.active);
+            setActive(e.target);
         }
-        e.target.classList.toggle(style.active);
-
-        setActive(e.target);
     };
-
-    // const r = `${style.item} ${style.active}`;
 
     return (
         <div className={style.container}>
             <ul className={style.list}>
-                {arr.map((el: any,index:number) => {
+                {arr.map((el: ArrType, index: number) => {
                     return (
-                        <li onClick={clickItem} key={index} className={`${style.item} ${categoriesBook===el.name? style.active:''}`}>
+                        <li onClick={clickItem} key={index} className={`${style.item} ${categoriesBook === el.name ? style.active : ""}`}>
                             {el.name}
                         </li>
                     );
                 })}
-                {/* <li onClick={clickItem} title={"Architecture"} className={`${style.item} ${style.active}`}>
-                    Architecture
-                </li>
-                <li onClick={clickItem} className={style.item}>
-                    Art & Fashion
-                </li>
-                <li onClick={clickItem} className={style.item}>
-                    Biography
-                </li>
-                <li onClick={clickItem} className={style.item}>
-                    Business
-                </li>
-                <li onClick={clickItem} className={style.item}>
-                    Crafts & Hobbies
-                </li>
-                <li onClick={clickItem} className={style.item}>
-                    Drama
-                </li>
-                <li onClick={clickItem} className={style.item}>
-                    Fiction
-                </li>
-                <li onClick={clickItem} className={style.item}>
-                    Food & Drink
-                </li>
-                <li onClick={clickItem} className={style.item}>
-                    Health & Wellbeing
-                </li>
-                <li onClick={clickItem} className={style.item}>
-                    History & Politics
-                </li>
-                <li onClick={clickItem} className={style.item}>
-                    Humor
-                </li>
-                <li onClick={clickItem} className={style.item}>
-                    Poetry
-                </li>
-                <li onClick={clickItem} className={style.item}>
-                    Psychology
-                </li>
-                <li onClick={clickItem} className={style.item}>
-                    Science
-                </li>
-                <li onClick={clickItem} className={style.item}>
-                    Technology
-                </li>
-                <li onClick={clickItem} className={style.item}>
-                    Travel & Maps
-                </li> */}
             </ul>
         </div>
     );

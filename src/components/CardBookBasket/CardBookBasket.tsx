@@ -1,15 +1,16 @@
 import styles from "./CardBookBasket.module.scss";
 import Image from "next/image";
 import { useDispatch } from "react-redux";
-import { bookAdded, bookRemove } from "../Reducer/sliceBook";
+import { bookAdded, bookRemove } from "../Reducer/sliceBookBasket";
 import { validateSrc } from "../func/exportFunc";
+import { BookType, CardBookBasketType, srcType } from "@/type";
 
-const CardBookBasket = ({ book }: any) => {
-    // console.log(book);
+const CardBookBasket = ({ book }: CardBookBasketType) => {
+
     const dispatch = useDispatch();
     const srcImage: string = validateSrc(book.volumeInfo.imageLinks);
 
-    const imageLoader = ({ src }: any) => {
+    const imageLoader = ({ src }: srcType) => {
         return `${src}`;
     };
     const plusCount = () => {
@@ -23,12 +24,17 @@ const CardBookBasket = ({ book }: any) => {
         if (book.count > 1) {
             let bookBasket = {
                 ...book,
-                count: book.count - 1,
-            };
+                count: book.count - 1,   
+            }
             dispatch(bookAdded(bookBasket));
         }
         if (book.count === 1) {
-            console.log(book.id);
+            let bookBasket = {
+                ...book,
+                buy:false   
+            }
+            dispatch(bookAdded(bookBasket));
+
             dispatch(bookRemove(book.id));
         }
     };
@@ -37,7 +43,7 @@ const CardBookBasket = ({ book }: any) => {
     return (
         <tr className={styles.box}>
             <td className={styles.card}>
-                <Image loader={imageLoader} className={styles.card_img} width={300} height={400} src={srcImage} alt="ava" />
+                <Image  unoptimized loader={imageLoader} className={styles.card_img} width={300} height={400} src={srcImage} alt="ava" />
                 <div className={styles.card_boxDescription}>
                     <p className={styles.card_boxDescription_title}>{book.volumeInfo.title}</p>
                     <p className={styles.card_boxDescription_author}>{book.volumeInfo.authors?.join(", ")}</p>

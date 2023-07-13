@@ -3,27 +3,41 @@ import Link from "next/link";
 import user from "../../../public/team/user.svg";
 import bag from "../../../public/team/shop bag.svg";
 import style from "./Header.module.scss";
-import { useState } from "react";
-import AuthProfile from "./AuthProfile/AuthProfile";
+import { useEffect, useState } from "react";
+import AuthProfile from "../AuthProfile/AuthProfile";
 import { useDispatch, useSelector } from "react-redux";
-import {  statePositionAuthProfile, changeStateBoolean } from "../Reducer/slice";
+import { statePositionAuthProfile, changeStateBoolean, changeCountBookBasket } from "../Reducer/sliceBookApi";
 import { useAppSelector } from "../Reducer/store";
+import { selectors } from "../Reducer/sliceBookBasket";
 
 const Header = (): JSX.Element => {
     const dispatch = useDispatch();
+    const { logIn, click, countBookBasket } = useAppSelector((state) => state.booksApiSlice);
+    let positionX:number = 0
+    const books = useSelector(selectors.selectAll);
+    //колличество книг в корзине
+    useEffect(() => {
+        let count = 0;
+        books.map((el: any) => {
+            count = count + el.count;
+        });
+        dispatch(changeCountBookBasket(count));
+    }, [books]);
 
-    const { logIn, click } = useAppSelector((state) => state.reducer);
-
-    const clickUserProfile = (e: any) => {
-        const position: Array<number> = [e.clientX, e.clientY];
+    const clickUserProfile = (e: MouseEvent<HTMLImageElement>) => {
+        if(e.target.parentElement.parentElement.clientWidth>=1440){
+            positionX =  1190
+        } else{
+            positionX = e.clientX
+        }
+        const position: Array<number> = [positionX, e.clientY];
         dispatch(statePositionAuthProfile(position));
-
         dispatch(changeStateBoolean("click"));
     };
 
-    const log = (value: boolean) => {
-        dispatch(changeStateBoolean("logIn"));
-    };
+    // const log = () => {
+    //     dispatch(changeStateBoolean("logIn"));
+    // };
 
     return (
         <div className={style.container}>
@@ -52,11 +66,12 @@ const Header = (): JSX.Element => {
                 ) : (
                     <Image style={{ cursor: "pointer" }} onClick={clickUserProfile} src={user} alt="user" />
                 )}
-                <Link href={"/basket"}>
+                <Link className={style.basket} href={"/basket"}>
                     <Image src={bag} alt="basket" />
+                    {countBookBasket !== 0 ? <div className={style.basket_count}>{countBookBasket}</div> : ""}
                 </Link>
+                {!logIn && click && <AuthProfile  />}
             </div>
-            {!logIn && click && <AuthProfile log={log} />}
         </div>
     );
 };

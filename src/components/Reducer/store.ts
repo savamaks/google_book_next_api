@@ -1,13 +1,12 @@
 
 import { configureStore } from "@reduxjs/toolkit";
 import {  TypedUseSelectorHook, useSelector } from "react-redux";
-import reducer from './slice'
 import { combineReducers } from '@reduxjs/toolkit';
 import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { persistStore } from 'redux-persist';
-import booksSlice from './sliceBook'
-// <reference types="redux-persist" />
+import booksSlice from './sliceBookBasket'
+import booksApiSlice from './sliceBookApi'
 
 const persistConfig = {
     key: 'root', //Название ключа в localStorage
@@ -15,7 +14,7 @@ const persistConfig = {
 }
 
 
-const rootReducer = combineReducers({ reducer,booksSlice})
+const rootReducer = combineReducers({ booksApiSlice,booksSlice})
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

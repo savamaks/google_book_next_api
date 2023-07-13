@@ -28,5 +28,28 @@
     font-size: 10px;
     font-weight: 700;
     text-transform: uppercase;
-
+}
+.basket{
+    position: relative;
+    &_count{
+        color: #fff;
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        text-transform: capitalize;
+        position: absolute;
+        background-color: red;
+        width: 13px;
+        height: 13px;
+        text-align: center;
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+        top: 10px;
+        left: 5px;
+    }
+    
 }

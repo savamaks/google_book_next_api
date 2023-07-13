@@ -1,3 +1,13 @@
+.modal{
+    z-index: 5;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: none;
+}
+
 .container {
     position: absolute;
     display: flex;
@@ -11,7 +21,7 @@
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     &_title {
         margin: 17px 0 14px;
-        color: var(--text-black, #1c2a39);
+        color:  #1c2a39;
         font-size: 16px;
         font-style: normal;
         font-weight: 700;
@@ -22,7 +32,7 @@
         flex-direction: column;
         align-items: center;
         &_name {
-            // margin: 0 15px 8px;
+            margin: 0 0 8px;
             align-self: flex-start;
             color: #000;
             font-size: 12px;
@@ -46,14 +56,7 @@
                 border: #4c3db2 1px solid;
             }
         }
-        &_error {
-            margin-bottom: 42px;
-            color: #ff353a;
-            font-size: 8px;
-            font-style: normal;
-            font-weight: 700;
-            line-height: normal;
-        }
+        
         &_button {
             width: 176px;
             height: 32px;
@@ -66,4 +69,12 @@
             text-transform: uppercase;
         }
     }
+}
+.error {
+    margin-bottom: 42px;
+    color: #ff353a;
+    font-size: 8px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
 }

@@ -13,9 +13,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     // запрос получается https://www.googleapis.com/books/v1/volumes?q=subject=Fiction&page=1&maxResults=2
 
-    const RES = await fetch(`https://www.googleapis.com/books/v1/volumes?${gbooksReqParams.toString()}`);
+    const response = await fetch(`https://www.googleapis.com/books/v1/volumes?${gbooksReqParams.toString()}`);
 
-    const booksData = await RES.json();
+    const booksData = await response.json();
 
     // если данные пришли со статусом 200, то они отправляются обьектом с полем data
     res.status(200).send({

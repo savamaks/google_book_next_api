@@ -1,39 +1,66 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import banner_one from "../../../public/images/banner-1.png";
 import banner_two from "../../../public/images/banner-2.png";
 import banner_three from "../../../public/images/banner-3.png";
 import arrow from "../../../public/images/arrow.svg";
-
 import Image from "next/image";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper";
+
 import "swiper/scss";
 import "swiper/scss/pagination";
 import style from "./Sliders.module.scss";
+import { Arr } from "@/type";
 
-const Sliders = () => {
+const arr: Array<Arr> = [
+    { name: "banner_one", url: banner_one },
+    { name: "banner_two", url: banner_two },
+    { name: "banner_three", url: banner_three },
+];
+const Sliders = (): JSX.Element => {
+    const [count, setCount] = useState(0);
+    let interval: any;
+    const mouseDown = () => {
+        clearInterval(interval);
+    };
+    const mouseUp = () => {
+        if (count >= 2) {
+            setCount(0);
+        } else {
+            setCount((prev) => prev + 1);
+        }
+    };
+    const clickPoint = (e: MouseEvent<HTMLDivElement>) => {
+        setCount(+e.target.attributes["data-index"].textContent);
+    };
+
+    useEffect(() => {
+        interval = setInterval(() => {
+            if (count >= 2) {
+                setCount(0);
+            } else {
+                setCount((prev) => prev + 1);
+            }
+        }, 2000);
+        return () => clearInterval(interval);
+    }, [count]);
+
     return (
         <div className={style.container}>
-            <Swiper
-                style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-                autoplay={{
-                    delay: 3000,
-                }}
-                pagination={{
-                    clickable: true,
-                }}
-                modules={[Pagination, Autoplay]}
-            >
-                <SwiperSlide className={style.box_img}>
-                    <Image priority={true} className={style.img} src={banner_one} alt="banner_one" />
-                </SwiperSlide>
-                <SwiperSlide className={style.box_img}>
-                    <Image priority={true} className={style.img} src={banner_two} alt="banner_two" />
-                </SwiperSlide>
-                <SwiperSlide className={style.box_img}>
-                    <Image priority={true} className={style.img} src={banner_three} alt="banner_three" />
-                </SwiperSlide>
-            </Swiper>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                <Image onMouseDown={mouseDown} onMouseUp={mouseUp} priority={true} className={style.img} src={arr[count].url} alt={arr[count].name} />
+                <div className={style.box}>
+                    {arr.map((el: Arr, index: number) => {
+                        return (
+                            <div
+                                onClick={clickPoint}
+                                data-index={index}
+                                key={index}
+                                className={`${style.box_point} ${count === index ? style.active : ""}`}
+                            ></div>
+                        );
+                    })}
+                </div>
+            </div>
+
             <div className={style.block}>
                 <p className={style.block_text}>Change old book on new</p>
                 <button className={style.block_button}>

@@ -6,7 +6,7 @@ import Header from "../Header/Header";
 import { Montserrat } from "next/font/google";
 import Navigation from "../Navigation/Navigation";
 import style from "./layout.module.scss";
-import Footer from "../../pages/blog";
+
 const montserrat = Montserrat({
     weight: ["700", "900"],
     style: ["normal", "italic"],
@@ -23,7 +23,7 @@ const Layout = ({ children }: PropsWithChildren) => {
             <Head>
                 <title>Google Books Api</title>
                 <meta name="description" content="Google Books shop" />
-                <meta name="author" content="Maksim Savinets" />
+                <meta name="author" content="Maksim Savinec" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
