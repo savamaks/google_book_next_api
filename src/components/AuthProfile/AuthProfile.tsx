@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
 import style from "./AuthProfile.module.scss";
 import emailValidate from "@/components/func/exportFunc";
 import { useDispatch } from "react-redux";
@@ -6,8 +6,6 @@ import { useAppSelector } from "@/components/Reducer/store";
 import { changeStateBoolean } from "@/components/Reducer/sliceBookApi";
 import { useRouter } from "next/router";
 import { requstUserData } from "../RequestApi/requestUserData";
-
-
 
 const AuthProfile = () => {
     const [inputEmail, setInputEmail] = useState("");
@@ -61,7 +59,7 @@ const AuthProfile = () => {
             });
         }
     };
-    const sendLoginPassword = (e: any) => {
+    const sendLoginPassword = (e: SyntheticEvent) => {
         e.preventDefault();
         if (correctPassword.email && correctPassword.password) {
             const params = new URLSearchParams();
@@ -80,13 +78,16 @@ const AuthProfile = () => {
         }
     };
 
-    const clickWindowAuth = (e:any) => {
-        if (e.target.attributes["data-title"]?.textContent === "modal") {
-            dispatch(changeStateBoolean("click"));
+    const clickWindowAuth = (e: SyntheticEvent) => {
+        const { target }: any = e;
+        if (target) {
+            if (target.attributes["data-title"].textContent === "modal") {
+                dispatch(changeStateBoolean("click"));
+            }
         }
     };
     useEffect(() => {
-        if (flag.success===true) {
+        if (flag.success === true) {
             dispatch(changeStateBoolean("logIn"));
 
             router.push("/user");
@@ -110,7 +111,7 @@ const AuthProfile = () => {
                         style={{ border: `${!correctPassword.password ? "  #FF353A 1px solid" : "#4c3db2 1px solid"}` }}
                     />
                 </form>
-                {!correctPassword.password && <p className={style.error}>Your password must be at least 6 characters long</p> }
+                {!correctPassword.password && <p className={style.error}>Your password must be at least 6 characters long</p>}
 
                 <button onClick={sendLoginPassword} className={style.container_form_button}>
                     LOG IN

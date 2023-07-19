@@ -30,7 +30,7 @@ const Header = (): JSX.Element => {
         } else{
             positionX = e.clientX
         }
-        const position: any = [positionX, e.clientY];
+        const position:any = [positionX, e.clientY];
         dispatch(statePositionAuthProfile(position));
         dispatch(changeStateBoolean("click"));
     };

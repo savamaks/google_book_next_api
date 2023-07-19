@@ -46,7 +46,7 @@ const booksApiSlice = createSlice({
             const { payload } = action;
             state[payload] = !state[payload];
         },
-        statePositionAuthProfile(state, action: any) {
+        statePositionAuthProfile(state, action: any):any {
             const { payload } = action;
             state.positionAuthProfile.x = payload[0];
             state.positionAuthProfile.y = payload[1];

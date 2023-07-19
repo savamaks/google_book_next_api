@@ -1,3 +1,4 @@
+import { StaticImageData } from "next/image";
 import plug from "../../../public/images/book-placeholder.jpg";
 
 const emailValidate = (value: string) => {
@@ -5,6 +6,7 @@ const emailValidate = (value: string) => {
 };
 
 export default emailValidate;
+
 
 export const validateSrc = (object: any) => {
     if (!object) {
