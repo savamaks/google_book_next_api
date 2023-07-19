@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import style from "./AuthProfile.module.scss";
 import emailValidate from "@/components/func/exportFunc";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/components/Reducer/store";
 import { changeStateBoolean } from "@/components/Reducer/sliceBookApi";
 import { useRouter } from "next/router";
@@ -63,7 +63,6 @@ const AuthProfile = () => {
     };
     const sendLoginPassword = (e: any) => {
         e.preventDefault();
-        console.log(correctPassword);
         if (correctPassword.email && correctPassword.password) {
             const params = new URLSearchParams();
             params.set("email", inputEmail);
@@ -111,7 +110,7 @@ const AuthProfile = () => {
                         style={{ border: `${!correctPassword.password ? "  #FF353A 1px solid" : "#4c3db2 1px solid"}` }}
                     />
                 </form>
-                {/* {!correctPassword.password ? <p className={style.error}>"Your password must be at least 6 characters long"</p> : <p className={style.error}></p>} */}
+                {!correctPassword.password && <p className={style.error}>"Your password must be at least 6 characters long"</p> }
 
                 <button onClick={sendLoginPassword} className={style.container_form_button}>
                     LOG IN

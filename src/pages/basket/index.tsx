@@ -9,21 +9,22 @@ import { selectors } from "@/components/Reducer/sliceBookBasket";
 import { BookType } from "@/type";
 import { EntityId, EntityState } from "@reduxjs/toolkit";
 
-
 const Basket = () => {
-    const books:any = useAppSelector((state) => state.booksSlice);
+    const books: any = useAppSelector((state) => state.booksSlice);
     const [totalPrice, setTotalPrice] = useState(0);
     const countBookBasket = useSelector(selectors.selectTotal);
-    console.log(books);
+    // let currencyCode: string = "";
+    const [currencyCode, setCurrencyCode] = useState('');
     useEffect(() => {
         let price = 0;
-
         books.ids.map((el: EntityId) => {
             console.log(typeof el);
             if (books.entities[el].saleInfo?.listPrice?.amount) {
-                
-                let priceBooks= books.entities[el].saleInfo.listPrice?.amount * books.entities[el].count
-                price = price +priceBooks;
+                let priceBooks = books.entities[el].saleInfo.listPrice?.amount * books.entities[el].count;
+                price = price + priceBooks;
+                if(currencyCode ===''){
+                    setCurrencyCode(books.entities[el].saleInfo.listPrice?.currencyCode) 
+                }
             }
         });
         setTotalPrice(price);
@@ -31,7 +32,7 @@ const Basket = () => {
         if (books.ids.length === 0) {
             setTotalPrice(0);
         }
-    }, [books,countBookBasket]);
+    }, [books, countBookBasket]);
     return (
         <Layout>
             <div className={style.container}>
@@ -55,7 +56,7 @@ const Basket = () => {
                 )}
                 <p className={style.text}>
                     {}
-                    {totalPrice > 0 ? `TOTAL PRICE: ${totalPrice.toFixed(2)} RUB` : countBookBasket > 0 ? "" : "Basket is empty..."}
+                    {totalPrice > 0 ? `TOTAL PRICE: ${totalPrice.toFixed(2)} ${currencyCode !==''?currencyCode:'a'}` : countBookBasket > 0 ? "" : "Basket is empty..."}
                 </p>
             </div>
         </Layout>
