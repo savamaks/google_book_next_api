@@ -5,24 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useAppSelector } from "@/components/Reducer/store";
 import { changeStateBoolean } from "@/components/Reducer/sliceBookApi";
 import { useRouter } from "next/router";
+import { requstUserData } from "../RequestApi/requestUserData";
 
-export const requstUserData = async (params: any, setFlag: any) => {
-    try {
-        const res = await fetch("http://localhost:3000/api/auth?", {
-            method: "POST",
-            body: params,
-        });
-        if (res.ok) {
-            const data = await res.json();
-            setFlag(data);
-        } else if (res.status === 400) {
-            const data = await res.json();
-            setFlag(data);
-        }
-    } catch (error) {
-        console.log("error");
-    }
-};
+
 
 const AuthProfile = () => {
     const [inputEmail, setInputEmail] = useState("");
