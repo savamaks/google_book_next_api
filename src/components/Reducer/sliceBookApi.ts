@@ -42,7 +42,7 @@ const booksApiSlice = createSlice({
         changeCountBookBasket(state, action) {
             state.countBookBasket = action.payload;
         },
-        changeStateBoolean(state, action: ActionTypePayload) {
+        changeStateBoolean(state:any, action: ActionTypePayload) {
             const { payload } = action;
             state[payload] = !state[payload];
         },
@@ -72,7 +72,7 @@ const booksApiSlice = createSlice({
 
 export default booksApiSlice.reducer;
 
-export const selectorsAdapter = dataBook.getSelectors((state) => state.booksApiSlice);
+export const selectorsAdapter = dataBook.getSelectors((state:any) => state.booksApiSlice);
 
 export const { removeAllBook,addBook } = booksApiSlice.actions;
 

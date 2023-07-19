@@ -24,13 +24,13 @@ const Header = (): JSX.Element => {
         dispatch(changeCountBookBasket(count));
     }, [books]);
 
-    const clickUserProfile = (e: MouseEvent<HTMLImageElement>) => {
+    const clickUserProfile = (e: any) => {
         if(e.target.parentElement.parentElement.clientWidth>=1440){
             positionX =  1190
         } else{
             positionX = e.clientX
         }
-        const position: Array<number> = [positionX, e.clientY];
+        const position: any = [positionX, e.clientY];
         dispatch(statePositionAuthProfile(position));
         dispatch(changeStateBoolean("click"));
     };

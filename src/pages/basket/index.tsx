@@ -11,7 +11,7 @@ import { EntityId, EntityState } from "@reduxjs/toolkit";
 
 
 const Basket = () => {
-    const books:EntityState<BookType> = useAppSelector((state) => state.booksSlice);
+    const books:any = useAppSelector((state) => state.booksSlice);
     const [totalPrice, setTotalPrice] = useState(0);
     const countBookBasket = useSelector(selectors.selectTotal);
     console.log(books);

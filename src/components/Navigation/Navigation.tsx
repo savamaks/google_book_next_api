@@ -11,7 +11,7 @@ type ArrType ={
     url: string,
 }
 const Navigation = (): JSX.Element => {
-    const [active, setActive] = useState("");
+    const [active, setActive] = useState<any>("");
     const dispatch = useDispatch();
     const { categoriesBook,firstLoading } = useAppSelector((state) => state.booksApiSlice);
 
@@ -81,7 +81,7 @@ const Navigation = (): JSX.Element => {
             url: "Travel",
         },
     ];
-    const clickItem = (e: MouseEvent<HTMLUListElement>) => {
+    const clickItem = (e: any) => {
         e.preventDefault();
         if (e.target.innerText !== categoriesBook) {
             if(firstLoading){

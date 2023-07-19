@@ -28,7 +28,7 @@ const Sliders = (): JSX.Element => {
     //         setCount((prev) => prev + 1);
     //     }
     // };
-    const clickPoint = (e: MouseEvent<HTMLDivElement>) => {
+    const clickPoint = (e: any) => {
         setCount(+e.target.attributes["data-index"].textContent);
     };
 

@@ -20,7 +20,7 @@ const booksSlice = createSlice({
 
 export default booksSlice.reducer;
 
-export const selectors = booksBasketAdapter.getSelectors((state) => state.booksSlice);
+export const selectors = booksBasketAdapter.getSelectors((state:any) => state.booksSlice);
 
 export const { bookAdded, bookRemove } = booksSlice.actions;
 

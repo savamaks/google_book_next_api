@@ -76,7 +76,7 @@ const AuthProfile = () => {
             });
         }
     };
-    const sendLoginPassword = (e: MouseEvent<HTMLButtonElement>) => {
+    const sendLoginPassword = (e: any) => {
         e.preventDefault();
         console.log(correctPassword);
         if (correctPassword.email && correctPassword.password) {
@@ -96,7 +96,7 @@ const AuthProfile = () => {
         }
     };
 
-    const clickWindowAuth = (e: MouseEvent<HTMLDivElement>) => {
+    const clickWindowAuth = (e:any) => {
         if (e.target.attributes["data-title"]?.textContent === "modal") {
             dispatch(changeStateBoolean("click"));
         }
@@ -126,7 +126,7 @@ const AuthProfile = () => {
                         style={{ border: `${!correctPassword.password ? "  #FF353A 1px solid" : "#4c3db2 1px solid"}` }}
                     />
                 </form>
-                {!correctPassword.password ? <p className={style.error}>"Your password must be at least 6 characters long"</p> : <p className={style.error}></p>}
+                {/* {!correctPassword.password ? <p className={style.error}>"Your password must be at least 6 characters long"</p> : <p className={style.error}></p>} */}
 
                 <button onClick={sendLoginPassword} className={style.container_form_button}>
                     LOG IN

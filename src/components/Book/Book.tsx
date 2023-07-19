@@ -8,7 +8,7 @@ import { validateSrc } from "../func/exportFunc";
 import { EntityId } from "@reduxjs/toolkit";
 import { BookTypeElement, BookType } from "@/type";
 
-const Book = ({ book }: BookTypeElement): JSX.Element => {
+const Book = ({ book }: any): JSX.Element => {
     const dispatch = useDispatch();
     const {} = useAppSelector((state) => state.booksApiSlice);
     const [buy, setBuy] = useState(false);
