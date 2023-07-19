@@ -110,7 +110,7 @@ const AuthProfile = () => {
                         style={{ border: `${!correctPassword.password ? "  #FF353A 1px solid" : "#4c3db2 1px solid"}` }}
                     />
                 </form>
-                {!correctPassword.password && <p className={style.error}>"Your password must be at least 6 characters long"</p> }
+                {!correctPassword.password && <p className={style.error}>Your password must be at least 6 characters long</p> }
 
                 <button onClick={sendLoginPassword} className={style.container_form_button}>
                     LOG IN
