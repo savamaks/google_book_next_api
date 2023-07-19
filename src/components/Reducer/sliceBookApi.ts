@@ -3,7 +3,7 @@ import { fetchBook } from "../RequestApi/RequestApi";
 import { BookType } from "@/type";
 
 const dataBook = createEntityAdapter({
-    selectId: (entity:BookType) => entity.id,
+    selectId: (entity: BookType) => entity.id,
     sortComparer: false,
 });
 type ActionTypePayload = {
@@ -14,10 +14,15 @@ type ActionTypePayloadNumber = {
     payload: number;
     type: string;
 };
+type ActionTypePayloadArray = {
+    payload: Array<number>;
+    type: string;
+};
+
 const booksApiSlice = createSlice({
     name: "booksApi",
     initialState: dataBook.getInitialState({
-        firstLoading:true,
+        firstLoading: true,
         statusLoading: "",
         error: "",
         categoriesBook: "Architecture",
@@ -32,7 +37,7 @@ const booksApiSlice = createSlice({
     }),
     reducers: {
         removeAllBook: dataBook.removeAll,
-        addBook:dataBook.addMany,
+        addBook: dataBook.addMany,
         changeCategoriesBook(state, action: ActionTypePayload) {
             state.categoriesBook = action.payload;
         },
@@ -46,7 +51,7 @@ const booksApiSlice = createSlice({
             const { payload } = action;
             state[payload] = !state[payload];
         },
-        statePositionAuthProfile(state, action: any):any {
+        statePositionAuthProfile(state, action: ActionTypePayloadArray) {
             const { payload } = action;
             state.positionAuthProfile.x = payload[0];
             state.positionAuthProfile.y = payload[1];
@@ -72,8 +77,8 @@ const booksApiSlice = createSlice({
 
 export default booksApiSlice.reducer;
 
-export const selectorsAdapter = dataBook.getSelectors((state:any) => state.booksApiSlice);
+export const selectorsAdapter = dataBook.getSelectors((state: any) => state.booksApiSlice);
 
-export const { removeAllBook,addBook } = booksApiSlice.actions;
+export const { removeAllBook, addBook } = booksApiSlice.actions;
 
 export const { changeCountBookBasket, changeStateBoolean, changeCategoriesBook, statePositionAuthProfile, changeCountPage } = booksApiSlice.actions;

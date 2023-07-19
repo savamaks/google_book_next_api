@@ -3,12 +3,13 @@ import Link from "next/link";
 import user from "../../../public/team/user.svg";
 import bag from "../../../public/team/shop bag.svg";
 import style from "./Header.module.scss";
-import { useEffect, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import AuthProfile from "../AuthProfile/AuthProfile";
 import { useDispatch, useSelector } from "react-redux";
 import { statePositionAuthProfile, changeStateBoolean, changeCountBookBasket } from "../Reducer/sliceBookApi";
 import { useAppSelector } from "../Reducer/store";
 import { selectors } from "../Reducer/sliceBookBasket";
+
 
 const Header = (): JSX.Element => {
     const dispatch = useDispatch();
@@ -24,15 +25,18 @@ const Header = (): JSX.Element => {
         dispatch(changeCountBookBasket(count));
     }, [books]);
 
-    const clickUserProfile = (e: any) => {
-        if(e.target.parentElement.parentElement.clientWidth>=1440){
-            positionX =  1190
-        } else{
-            positionX = e.clientX
-        }
-        const position:any = [positionX, e.clientY];
-        dispatch(statePositionAuthProfile(position));
-        dispatch(changeStateBoolean("click"));
+    const clickUserProfile = (e:any) => {
+       
+            if(e.target.parentElement.parentElement.clientWidth>=1440){
+                positionX =  1190
+            } else{
+                positionX = e.clientX
+            }
+            const position:Array<number> = [positionX, e.clientY];
+            dispatch(statePositionAuthProfile(position));
+            dispatch(changeStateBoolean("click"));
+        
+        
     };
 
     // const log = () => {
