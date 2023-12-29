@@ -12,7 +12,7 @@ const AuthProfile = () => {
     const [inputPassword, setInputPassword] = useState("");
     const [flag, setFlag] = useState({ success: false, error: false, message: "" });
     const [correctPassword, setCorrectPassword] = useState({ email: false, password: false });
-    const { positionAuthProfile, logIn } = useAppSelector((state) => state.booksApiSlice);
+    const { positionAuthProfile } = useAppSelector((state) => state.booksApiSlice);
     const dispatch = useDispatch();
     const router = useRouter();
 
@@ -92,7 +92,7 @@ const AuthProfile = () => {
 
             router.push("/user");
         }
-    }, [flag]);
+    });
     return (
         <div className={style.modal} data-title="modal" onClick={clickWindowAuth}>
             <div style={{ top: `${40 + positionAuthProfile.y}px`, left: `${positionAuthProfile.x - 100}px` }} className={style.container}>

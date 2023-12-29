@@ -23,7 +23,7 @@ const Header = (): JSX.Element => {
             count = count + el.count;
         });
         dispatch(changeCountBookBasket(count));
-    }, [books]);
+    });
 
     const clickUserProfile = (e:any) => {
        

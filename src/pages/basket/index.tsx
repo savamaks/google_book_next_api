@@ -2,12 +2,10 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../components/layout/layout";
 import style from "./basket.module.scss";
 import CardBookBasket from "@/components/CardBookBasket/CardBookBasket";
-import Image from "next/image";
 import { useAppSelector } from "@/components/Reducer/store";
 import { useSelector } from "react-redux";
 import { selectors } from "@/components/Reducer/sliceBookBasket";
-import { BookType } from "@/type";
-import { EntityId, EntityState } from "@reduxjs/toolkit";
+import { EntityId } from "@reduxjs/toolkit";
 
 const Basket = () => {
     const books: any = useAppSelector((state) => state.booksSlice);
@@ -32,7 +30,7 @@ const Basket = () => {
         if (books.ids.length === 0) {
             setTotalPrice(0);
         }
-    }, [books, countBookBasket]);
+    },[books.ids, books.entities, currencyCode]);
     return (
         <Layout>
             <div className={style.container}>

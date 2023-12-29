@@ -6,7 +6,7 @@ import { useAppSelector } from "../Reducer/store";
 import { bookAdded, bookRemove, selectors } from "../Reducer/sliceBookBasket";
 import { validateSrc } from "../func/exportFunc";
 import { EntityId } from "@reduxjs/toolkit";
-import { BookTypeElement, BookType } from "@/type";
+import {  BookType } from "@/type";
 
 const Book = ({ book }: any): JSX.Element => {
     const dispatch = useDispatch();
@@ -23,7 +23,7 @@ const Book = ({ book }: any): JSX.Element => {
                 setBuy(true);
             }
         });
-    }, [counts]);
+    }, );
 
     const addBookBasket = () => {
         if (!buy) {
